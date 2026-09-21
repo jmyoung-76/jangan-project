@@ -13,5 +13,12 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+
+        val myAge = 20
+      //  myAge = 25
+
+        println("나이 : $myAge")
+        println("진짜나이 : " + myAge)
+
     }
 }
