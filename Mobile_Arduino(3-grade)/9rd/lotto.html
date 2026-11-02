@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로또번호생성기</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .lotto-box {
+      width: 500px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 30px 24px;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: 28px;
+      color: #222;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ffdd57;
+      color: #222;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #333;
+    }
+
+    .result {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .ball {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #fff;
+      background: #f59e0b;
+    }
+
+    .ball:nth-child(2n) {
+      background: #f97316;
+    }
+
+    .ball:nth-child(3n) {
+      background: #10b981;
+    }
+
+    .ball:nth-child(4n) {
+      background: #3b82f6;
+    }
+
+    .ball:nth-child(5n) {
+      background: #8b5cf6;
+    }
+
+    .ball:nth-child(6n) {
+      background: #ef4444;
+    }
+
+    .bonus {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="lotto-box">
+    <h1>로또번호생성기</h1>
+
+    <div class="controls">
+      <button class="btn btn-primary" type="button">번호 뽑기</button>
+      <button class="btn btn-secondary" type="button">초기화</button>
+    </div>
+
+    <div class="result" aria-label="로또 번호 출력 영역">
+      <div class="ball">1</div>
+      <div class="ball">2</div>
+      <div class="ball">3</div>
+      <div class="ball">4</div>
+      <div class="ball">5</div>
+      <div class="ball">6</div>
+    </div>
+
+    <div class="bonus">보너스 번호: <span>7</span></div>
+  </div>
+</body>
+</html>

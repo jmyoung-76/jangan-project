@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>깨비키즈</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #ebebeb;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      color: #222;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      background: #efefef;
+    }
+
+    .topbar {
+      background: #d7d7d7;
+      border-bottom: 1px solid #c3c3c3;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-inner {
+      width: 1280px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-btn {
+      background: linear-gradient(#47c2f5, #36a9e1);
+      border: 3px solid #e9f5ff;
+      border-radius: 12px 12px 0 0;
+      color: white;
+      font-weight: 900;
+      font-size: 16px;
+      height: 52px;
+      padding: 0 22px;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.08);
+      cursor: pointer;
+    }
+
+    .menu-btn:nth-child(2) { background: linear-gradient(#5ec0f6, #32b9ea); }
+    .menu-btn:nth-child(3) { background: linear-gradient(#68d7c5, #29b9ae); }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #f5d35d;
+      border: 4px solid #4b4b4b;
+      position: relative;
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.06);
+      margin-right: 8px;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #000;
+      top: 15px;
+    }
+    .brand-mark::before { left: 11px; }
+    .brand-mark::after { right: 11px; }
+
+    .brand-ribbon {
+      width: 16px;
+      height: 12px;
+      background: #ff6b6b;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -8px;
+    }
+
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 15px;
+      color: #4b4b4b;
+      font-weight: 700;
+    }
+
+    .search {
+      width: 230px;
+      height: 40px;
+      border: 1px solid #bcbcbc;
+      background: rgba(255,255,255,0.8);
+      border-radius: 23px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+    }
+
+    .search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+    }
+
+    .search::after {
+      content: "🔍";
+      font-size: 20px;
+      opacity: 0.8;
+    }
+
+    .main-shell {
+      width: 1280px;
+      margin: 0 auto;
+      background: #f4f5f5;
+      border-left: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      height: 82px;
+      padding: 0 18px;
+      background: #f5f5f5;
+      gap: 18px;
+      border-bottom: 1px solid #d3d3d3;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #3fbdff, #3cc17d, #ffbb00, #ff5a5a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 3px 3px 0 rgba(255,255,255,0.7);
+      transform: skewX(-8deg);
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      gap: 30px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .nav-links .tag {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .nav-links .tag::before {
+      content: "#";
+      position: absolute;
+      left: 0;
+      color: #1ab9d6;
+    }
+
+    .lesson-strip {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 10px;
+      background: #f3f3f3;
+      padding: 10px 18px 14px;
+      border-bottom: 1px solid #d5d5d5;
+    }
+
+    .lesson-item {
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      border: 3px solid #4d4d4d;
+      background: linear-gradient(180deg, #c4f3c0, #9ce0f0);
+      position: relative;
+      box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    }
+
+    .avatar::before, .avatar::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      top: 18px;
+    }
+    .avatar::before { left: 14px; }
+    .avatar::after { right: 14px; }
+
+    .avatar .smile {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 8px;
+      border: 3px solid #000;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .item-yellow { background: linear-gradient(180deg, #f9f198, #f1db76); }
+    .item-green { background: linear-gradient(180deg, #a7f3d3, #7ee0b4); }
+    .item-sky { background: linear-gradient(180deg, #bfe8ff, #94d4ff); }
+    .item-pink { background: linear-gradient(180deg, #ffd7ec, #f8bde0); }
+    .item-orange { background: linear-gradient(180deg, #ffd8a8, #ffc96a); }
+    .item-purple { background: linear-gradient(180deg, #d9d3ff, #b7adff); }
+    .item-red { background: linear-gradient(180deg, #ffc9b9, #ff915c); }
+    .item-lime { background: linear-gradient(180deg, #dcf9b7, #b5eca3); }
+    .item-blue { background: linear-gradient(180deg, #bfe8f8, #7dd0f1); }
+
+    .utility-bar {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px 18px;
+      background: #e7e7e7;
+      border-bottom: 1px solid #d4d4d4;
+    }
+
+    .tool {
+      min-height: 62px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      border: 1px solid #d6d6d6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      color: #333;
+      padding: 6px;
+    }
+
+    .tool-square {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      border: 3px solid #4d4d4d;
+      background: linear-gradient(180deg, #f7f7f7, #dfeaf6);
+      position: relative;
+      margin: 0 auto 6px;
+    }
+
+    .tool-square::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #4d4d4d;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      background: #f2f2f2;
+      border-bottom: 1px solid #cfcfcf;
+    }
+
+    .feature-card {
+      min-height: 190px;
+      border-right: 1px solid #d6d6d6;
+      background: rgba(255,255,255,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .feature-card:last-child { border-right: none; }
+
+    .feature-illus {
+      width: 110px;
+      height: 110px;
+      border-radius: 18px;
+      border: 4px solid #4c4c4c;
+      background: linear-gradient(180deg, #f5e57e, #f6d26e);
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .feature-illus::before,
+    .feature-illus::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #000;
+      border-radius: 50%;
+      top: 36px;
+    }
+    .feature-illus::before { left: 26px; }
+    .feature-illus::after { right: 26px; }
+
+    .feature-illus .smile {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      width: 28px;
+      height: 12px;
+      border: 4px solid #000;
+      border-top: none;
+      border-radius: 0 0 28px 28px;
+      transform: translateX(-50%);
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+      color: #2c2c2c;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #4a4a4a;
+    }
+
+    .feature-card:nth-child(2) .feature-illus { background: linear-gradient(180deg, #f8d5de, #f0a7c7); }
+    .feature-card:nth-child(3) .feature-illus { background: linear-gradient(180deg, #d9f2ff, #86d9ff); }
+    .feature-card:nth-child(4) .feature-illus { background: linear-gradient(180deg, #f5ebc9, #d4b48b); }
+    .feature-card:nth-child(5) .feature-illus { background: linear-gradient(180deg, #d1f4f2, #8edce2); }
+
+    .bottom-section {
+      background: #ededed;
+      padding: 0 0 30px;
+    }
+
+    .split-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #d8d8d8;
+      border-top: 1px solid #c8c8c8;
+      border-bottom: 1px solid #bbbbbb;
+      text-align: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: #1f1f1f;
+    }
+
+    .split-head > div {
+      padding: 16px 0;
+      background: linear-gradient(180deg, #f2f2f2, #d7d7d7);
+    }
+
+    .split-head > div:first-child {
+      border-right: 1px solid #bfbfbf;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 12px;
+      padding: 16px 18px 0;
+    }
+
+    .mini-card {
+      background: #ffffff;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 12px 8px 10px;
+      text-align: center;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-figure {
+      width: 110px;
+      height: 90px;
+      border-radius: 12px;
+      border: 3px solid #4c4c4c;
+      background: linear-gradient(180deg, #f6f3d0, #f4e7a2);
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .mini-figure::before,
+    .mini-figure::after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #000;
+      border-radius: 50%;
+      top: 28px;
+    }
+    .mini-figure::before { left: 26px; }
+    .mini-figure::after { right: 26px; }
+
+    .mini-figure .smile {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      width: 28px;
+      height: 12px;
+      border: 3px solid #000;
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      transform: translateX(-50%);
+    }
+
+    .mini-card h4 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      color: #2a2a2a;
+    }
+
+    .mini-card p {
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1200px) {
+      .top-inner,
+      .main-shell { width: 100%; }
+      .lesson-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .feature-row { grid-template-columns: repeat(3, 1fr); }
+      .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .topbar { height: auto; }
+      .top-inner { flex-wrap: wrap; padding: 10px 12px; }
+      .menu-left { width: 100%; justify-content: center; }
+      .user-box { width: 100%; justify-content: center; }
+      .nav-row { flex-wrap: wrap; height: auto; padding: 14px 12px; }
+      .nav-links { flex-wrap: wrap; gap: 10px 16px; }
+      .lesson-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .utility-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .feature-row { grid-template-columns: repeat(2, 1fr); }
+      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="top-inner">
+        <div class="menu-left">
+          <button class="menu-btn">깨비키즈</button>
+          <button class="menu-btn">깨비누리</button>
+          <button class="menu-btn">깨비학습지</button>
+        </div>
+
+        <div class="user-box">
+          <span>로그인</span>
+          <span>회원가입</span>
+          <span>유료신청</span>
+          <span>My깨비</span>
+          <div class="search" aria-label="검색"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-shell">
+      <div class="nav-row">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="brand-ribbon"></span>
+        </div>
+        <div class="logo">깨비키즈</div>
+        <div class="nav-links">
+          <span class="tag">플래시 이용방법 안내</span>
+          <span>주차학습</span>
+          <span>프린트학습지</span>
+          <span>모바일앱</span>
+          <span>학습관리</span>
+          <span>깨비게시판</span>
+        </div>
+      </div>
+
+      <div class="lesson-strip">
+        <div class="lesson-item"><div class="avatar item-yellow"><div class="smile"></div></div>아가</div>
+        <div class="lesson-item"><div class="avatar item-green"><div class="smile"></div></div>한글</div>
+        <div class="lesson-item"><div class="avatar item-sky"><div class="smile"></div></div>수학</div>
+        <div class="lesson-item"><div class="avatar item-pink"><div class="smile"></div></div>영어</div>
+        <div class="lesson-item"><div class="avatar item-orange"><div class="smile"></div></div>동요</div>
+        <div class="lesson-item"><div class="avatar item-purple"><div class="smile"></div></div>동화</div>
+        <div class="lesson-item"><div class="avatar item-red"><div class="smile"></div></div>창의</div>
+        <div class="lesson-item"><div class="avatar item-lime"><div class="smile"></div></div>과학</div>
+        <div class="lesson-item"><div class="avatar item-blue"><div class="smile"></div></div>월드</div>
+        <div class="lesson-item"><div class="avatar item-sky"><div class="smile"></div></div>한자</div>
+        <div class="lesson-item"><div class="avatar item-yellow"><div class="smile"></div></div>초등</div>
+        <div class="lesson-item"><div class="avatar item-pink"><div class="smile"></div></div>보물</div>
+      </div>
+
+      <div class="utility-bar">
+        <div class="tool"><span>수학단계학습</span></div>
+        <div class="tool"><span>숫자</span></div>
+        <div class="tool"><span>모양·공간</span></div>
+        <div class="tool"><span>비교·관찰</span></div>
+        <div class="tool"><span>순서·분류</span></div>
+        <div class="tool"><span>덧셈</span></div>
+        <div class="tool"><span>뺄셈</span></div>
+        <div class="tool"><span>구구단</span></div>
+        <div class="tool"><span>십간단</span></div>
+        <div class="tool"><span>주산·암산</span></div>
+        <div class="tool"><span>곱셈·나눗셈</span></div>
+        <div class="tool"><span>수학학습지</span></div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-card">
+          <div class="feature-illus"><div class="smile"></div></div>
+          <h3>구구단</h3>
+          <p>2단부터 9단을 재미있게<br>노래와 함께 반복 학습</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-illus"><div class="smile"></div></div>
+          <h3>구구단트</h3>
+          <p>구구단을 센트에 맞춰<br>빠르게 반복학습</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-illus"><div class="smile"></div></div>
+          <h3>구구단게임</h3>
+          <p>다양한 게임식 문제를 통해<br>즐겁게 학습</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-illus"><div class="smile"></div></div>
+          <h3>도전구구단</h3>
+          <p>시간 제한을 두어<br>실력을 키우는 문제</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-illus"><div class="smile"></div></div>
+          <h3>구구단학습지</h3>
+          <p>구구단 표와 각 단의<br>학습지가 한 번에 제공</p>
+        </div>
+      </div>
+
+      <div class="bottom-section">
+        <div class="split-head">
+          <div>추천 학습지</div>
+          <div>추천 콘텐츠</div>
+        </div>
+
+        <div class="card-grid">
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 2~9단</h4>
+              <p>2~9단 기본 학습</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 2,3단</h4>
+              <p>기초 반복 연습</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 2단</h4>
+              <p>순서와 개념 익히기</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 4,5단</h4>
+              <p>혼합 계산 연습</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 4단</h4>
+              <p>개념 확장 학습</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 5단</h4>
+              <p>빠른 계산 실력</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-figure"><div class="smile"></div></div>
+            <div>
+              <h4>구구단 6,7단</h4>
+              <p>심화 문제 풀이</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
