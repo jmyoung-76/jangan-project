@@ -1,0 +1,79 @@
+* { box-sizing: border-box; } /* 전체 요소의 크기 계산을 통일한다. */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fef3c7, #f8fafc, #e0f2fe); /* 바깥 배경을 순수한 색으로 정리한다. */
+  font-family: Arial, sans-serif;
+} /* 계산기 외부 배경은 단순하게 정리한다. */
+
+.calculator-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 380px);
+} /* 계산기 너비를 제한하고 배경 위에 표시되도록 한다. */
+
+.calculator {
+  background-image: url('https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=800&q=80'); /* 계산기 내부 배경에도 귀여운 고양이 사진을 넣는다. */
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: 0 20px 30px rgba(15, 23, 42, 0.18);
+  padding: 22px;
+  backdrop-filter: blur(4px);
+} /* 계산기 내부가 고양이 사진 배경으로 보이게 만든다. */
+
+.display {
+  min-height: 90px;
+  margin-bottom: 18px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  background: rgba(17, 24, 39, 0.75);
+  color: #f8fafc;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+} /* 결과 화면을 크게 보여준다. */
+
+.button-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } /* 네 칸 배치로 버튼을 정리한다. */
+
+.button {
+  border: none;
+  border-radius: 16px;
+  padding: 20px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.88);
+  color: #111827;
+  transition: transform 0.1s ease, background 0.1s ease;
+} /* 기본 버튼 스타일을 설정한다. */
+
+.button:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.96); } /* 마우스 올릴 때 살짝 움직이는 효과를 준다. */
+
+.button:active { transform: translateY(0); } /* 클릭 시 눌리는 느낌을 준다. */
+
+.operator { background: rgba(245, 158, 11, 0.92); color: #ffffff; } /* 연산자 버튼을 강조 색으로 만든다. */
+
+.operator:hover { background: rgba(217, 119, 6, 0.95); } /* 연산자 버튼 hover 색을 조정한다. */
+
+.clear { background: rgba(239, 68, 68, 0.92); color: #ffffff; } /* clear 버튼을 경고 색으로 만든다. */
+
+.clear:hover { background: rgba(220, 38, 38, 0.95); } /* clear 버튼 hover 색을 조정한다. */
+
+.equal { background: rgba(37, 99, 235, 0.92); color: #ffffff; } /* 결과 버튼을 파란색으로 강조한다. */
+
+.equal:hover { background: rgba(29, 78, 216, 0.95); } /* 결과 버튼 hover 색을 조정한다. */
+
+.wide { grid-column: span 2; } /* 0 버튼을 두 칸 폭으로 만든다. */
+
+@media (max-width: 420px) { .button { padding: 17px 0; font-size: 1.3rem; } } /* 화면이 작으면 버튼 크기를 줄인다. */

@@ -1,0 +1,35 @@
+<!DOCTYPE html> <!-- HTML5 문서 선언을 한다. -->
+<html lang="ko"> <!-- 한국어 문서로 설정한다. -->
+<head> <!-- 문서의 헤더 영역을 시작한다. -->
+  <meta charset="UTF-8" /> <!-- 문자 인코딩을 UTF-8로 설정한다. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 모바일 화면 크기에 맞춘다. -->
+  <title>간단 계산기</title> <!-- 브라우저 탭 제목을 설정한다. -->
+  <link rel="stylesheet" href="css/style.css" /> <!-- 계산기 디자인 파일을 연결한다. -->
+</head> <!-- 문서 헤더를 닫는다. -->
+<body> <!-- 본문을 시작한다. -->
+  <main class="calculator-wrap"> <!-- 계산기 전체 영역을 만든다. -->
+    <section class="calculator"> <!-- 계산기 카드 영역을 만든다. -->
+      <div id="display" class="display" aria-live="polite">0</div> <!-- 현재 계산 값을 보여주는 화면이다. -->
+      <div class="button-grid"> <!-- 버튼을 배치하는 그리드 영역이다. -->
+        <button type="button" class="button clear" data-action="clear" data-value="clear">C</button> <!-- 입력을 전부 지우는 버튼이다. -->
+        <button type="button" class="button operator" data-action="operator" data-value="/">/</button> <!-- 나누기 연산 버튼이다. -->
+        <button type="button" class="button operator" data-action="operator" data-value="*">*</button> <!-- 곱하기 연산 버튼이다. -->
+        <button type="button" class="button operator" data-action="operator" data-value="-">-</button> <!-- 빼기 연산 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="7">7</button> <!-- 숫자 7 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="8">8</button> <!-- 숫자 8 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="9">9</button> <!-- 숫자 9 버튼이다. -->
+        <button type="button" class="button operator" data-action="operator" data-value="+">+</button> <!-- 더하기 연산 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="4">4</button> <!-- 숫자 4 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="5">5</button> <!-- 숫자 5 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="6">6</button> <!-- 숫자 6 버튼이다. -->
+        <button type="button" class="button equal" data-action="equal" data-value="=">=</button> <!-- 계산 결과를 보여주는 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="1">1</button> <!-- 숫자 1 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="2">2</button> <!-- 숫자 2 버튼이다. -->
+        <button type="button" class="button" data-action="number" data-value="3">3</button> <!-- 숫자 3 버튼이다. -->
+        <button type="button" class="button wide" data-action="number" data-value="0">0</button> <!-- 숫자 0 버튼이다. -->
+      </div> <!-- 버튼 그리드를 닫는다. -->
+    </section> <!-- 계산기 카드 영역을 닫는다. -->
+  </main> <!-- 계산기 전체 영역을 닫는다. -->
+  <script src="js/calculator.js"></script> <!-- 계산기 동작 로직을 연결한다. -->
+</body> <!-- 본문을 닫는다. -->
+</html> <!-- HTML 문서를 닫는다. -->
